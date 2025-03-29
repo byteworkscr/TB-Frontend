@@ -1,6 +1,5 @@
 'use client';
 
-
 import { DashboardFooter } from "@/components/layouts/Footer";
 import { DashboardHeader } from "@/components/layouts/Header";
 import { RouteGuard } from "@/components/auth/RouteGuard";
@@ -8,13 +7,6 @@ import { LenderSidebar } from "@/components/layouts/lender/Sidebar";
 import ParticlesBackground from "@/components/lender/active-loans/ParticlesBackground"; 
 import type React from "react";
 import { useState, useEffect } from "react";
-import { DashboardFooter } from '@/components/layouts/Footer';
-import { DashboardHeader } from '@/components/layouts/Header';
-import { RouteGuard } from '@/components/auth/RouteGuard';
-import type React from 'react';
-import { useState, useEffect } from 'react';
-import { LenderSidebar } from '@/components/layouts/lender/Sidebar';
-
 
 export default function LenderLayout({
   children,
@@ -31,28 +23,24 @@ export default function LenderLayout({
   }, [theme]);
 
   return (
-
     <RouteGuard allowedRoles={["Lender"]}>
       <div className={`relative flex min-h-screen ${theme === "dark" ? "dark" : ""}`}>
-
+        
+        {/* Background Particles */}
         <div className="absolute inset-0 -z-10">
           <ParticlesBackground />
         </div>
 
-
-    <RouteGuard allowedRoles={['Lender']}>
-      <div className={`flex min-h-screen ${theme === 'dark' ? 'dark' : ''}`}>
-        <LenderSidebar />
-        <div className='w-full flex flex-col bg-gradient-to-b from-[#0B1120] via-[#0B1120] to-[#121E31]'>
-          {/* <div className='w-full'> */}
-          <DashboardHeader
-            theme={theme}
-            setTheme={setTheme}
-            setLanguage={setLanguage}
-          />
-          {children}
-          <DashboardFooter />
+        {/* Sidebar and Main Content */}
+        <div className="flex min-h-screen">
+          <LenderSidebar />
+          <div className="w-full flex flex-col bg-gradient-to-b from-[#0B1120] via-[#0B1120] to-[#121E31]">
+            <DashboardHeader theme={theme} setTheme={setTheme} setLanguage={setLanguage} />
+            {children}
+            <DashboardFooter />
+          </div>
         </div>
+
       </div>
     </RouteGuard>
   );
